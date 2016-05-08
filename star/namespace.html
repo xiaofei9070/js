@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<body>
+		<button>display event.namespace</button>
+		<p></p>
+		
+	</body>
+	<script>
+  $("p").bind("test.something", function(event) {
+    alert( event.namespace );  });
+  $("button").click(function(event) {
+    $("p").trigger("test.something");
+  });
+    </script>
+</html>

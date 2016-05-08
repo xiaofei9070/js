@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.success{background: url(img/checked.gif) no-repeat left center;white-space: nowrap;padding-left: 16px;}
+			.error{background: url(img/unchecked.gif) no-repeat left center;white-space: nowrap;padding-left: 16px;}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	</head>
+	<body>
+		<form id="formInput">
+			<div>
+				<input type="text" name="name" class="require" value="1" data-role="/^[0-9]$/" data-msg="请输入姓名" data-success="ok" data-error="需要为数字" id="name"/>
+			</div>
+			<select type="text" name="select" class="require" value="1" data-role="*" data-msg="请输入ser" id="select"/>
+				<option value="1">1</option>
+			</select>
+			<button id="submitBtn" type="submit">提交</button>
+		</form>
+		<script type="text/javascript">
+			(function($){
+				var defaults = {
+						require:'require',
+						dataRole:'data-role',
+						dataAjax:'data-ajax',
+						dataError:'data-error',
+						dataMsg:'data-msg',
+						dataSuccess:'data-success'
+					}
+				var messages = {
+						
+				}
+				$.fn.extend({
+					ajaxsubmit:function(option){
+						
+					},
+					showMsg:function(dataMsg){
+						var msg = $(this).attr(dataMsg);
+						if(typeof(msg) == 'undefined'){
+							msg = '';
+						}
+						$(this).createHint('msg',msg);
+					},
+					showError:function(dataError){
+						var err = $(this).attr(dataError);
+						if(typeof(err) == 'undefined'){
+							err = 'error';
+						}
+						$(this).createHint('error',err);
+					},
+					showSuccess:function(dataSuccess){
+						var suc = $(this).attr(dataSuccess);
+						if(typeof(suc) == 'undefined'){
+							suc = 'ok';
+						}
+						$(this).createHint('success',suc);
+					},
+					role:function(dataRole){
+						var reg = $(this).attr(dataRole);
+						if(reg == '*'){
+							return true;
+						}else{
+							return eval(reg).test($(this).val());
+						}
+					},
+					ajaxValidata:function(){
+						
+					},
+					createHint:function(c,msg){
+						var name = $(this).attr('name');
+						if(typeof(name) != 'undefined'){
+							var obj = $(this).parents('form').find('#' + name + "Tip");
+							var clzss = obj.attr('class');
+							if(typeof(clzss) == 'undefined'){
+								$(this).after('<span id="' + name + 'Tip" class="' + c + '">'+msg+'</span>')
+							}else{
+								obj.removeAttr('class').addClass(c).text(msg);
+							}
+						}
+					}
+				})
+				$.fn.validateform = function(options){
+					var t = this
+					var opts = $.extend(defaults,options);
+					$(t).find('.' + opts.require).each(function(){
+						var dataFor = $(t).attr('data-for');
+						$(this).on({
+							'focus':function(){
+								$(this).showMsg(opts.dataMsg);
+								},
+							'blur' :function(){
+								if($(this).role(opts.dataRole)){
+									$(this).showSuccess(opts.dataSuccess);
+								}else{
+									$(this).showError(opts.dataError);
+									}
+								}
+						});
+					});
+					$(t).find('type[submit]').on('click',function(){
+						console.error('ee')
+						return false;
+					})
+				}
+			})(jQuery)
+			$('#formInput').validateform();
+		</script>
+	</body>
+</html>
