@@ -12,7 +12,7 @@
 	<body>
 		<form id="formInput">
 			<div>
-				<input type="text" name="name" class="require" value="1" data-role="/^[0-9]$/" data-msg="请输入姓名" data-success="ok" data-error="需要为数字" id="name"/>
+				<input type="text" name="name" class="require" value="1" data-role="/^[0-9]+$/" data-msg="请输入姓名" data-success="ok" data-error="需要为数字" id="name"/>
 			</div>
 			<select type="text" name="select" class="require" value="1" data-role="*" data-msg="请输入ser" id="select"/>
 				<option value="1">1</option>
@@ -79,29 +79,51 @@
 								obj.removeAttr('class').addClass(c).text(msg);
 							}
 						}
-					}
-				})
-				$.fn.validateform = function(options){
-					var t = this
-					var opts = $.extend(defaults,options);
-					$(t).find('.' + opts.require).each(function(){
-						var dataFor = $(t).attr('data-for');
-						$(this).on({
-							'focus':function(){
-								$(this).showMsg(opts.dataMsg);
-								},
-							'blur' :function(){
-								if($(this).role(opts.dataRole)){
+					},
+					bindEvent:function(opts){
+						var t = this;
+						$(t).find('.' + opts.require).each(function(){
+							$(this).on({
+								'focus':function(){
+										$(this).showMsg(opts.dataMsg);
+									},
+								'blur' :function(){
+										if($(this).role(opts.dataRole)){
+											$(this).showSuccess(opts.dataSuccess);
+										}else{
+											$(this).showError(opts.dataError);
+										}
+									}
+							});
+						});
+					},
+					unBindEvent:function(c){
+						var t = this;
+						$(t).find('.' + c).each(function(){
+							$(this).off('focus');
+							$(this).off('blur');
+						});
+					},
+					validate:function(opts){
+						var t = this;
+						var vali = true;
+						$(t).find('.' + opts.require).each(function(){
+							if($(this).role(opts.dataRole)){
 									$(this).showSuccess(opts.dataSuccess);
 								}else{
 									$(this).showError(opts.dataError);
-									}
+									vali = false;
 								}
 						});
-					});
-					$(t).find('type[submit]').on('click',function(){
-						console.error('ee')
-						return false;
+						return vali;
+					}
+				});
+				$.fn.validateform = function(callback,options){
+					var t = this
+					var opts = $.extend(defaults,options);
+					$(t).bindEvent(opts);
+					$(t).on('submit',function(e){
+						return $(t).validate(opts);
 					})
 				}
 			})(jQuery)
