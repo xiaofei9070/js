@@ -12,12 +12,14 @@
 	<body>
 		<form id="formInput">
 			<div>
-				<input type="text" name="name" class="require" value="1" data-role="/^[0-9]+$/" data-msg="请输入姓名" data-success="ok" data-error="需要为数字" id="name"/>
+				<input type="text" name="name" class="require" value="1" data-role="/^[a-zA-Z]+$/" data-msg="请输入姓名" data-success="ok" data-error="需要为字母" id="name"/>
+				<input type="text" name="age" class="require" value="1" data-role="/^[0-9]+$/" data-msg="请输入年龄" data-success="ok" data-error="需要为数字" id="age"/>
 			</div>
 			<select type="text" name="select" class="require" value="1" data-role="*" data-msg="请输入ser" id="select"/>
 				<option value="1">1</option>
 			</select>
 			<button id="submitBtn" type="submit">提交</button>
+			<a id="submitBtnA">提交</a>
 		</form>
 		<script type="text/javascript">
 			(function($){
@@ -118,16 +120,28 @@
 						return vali;
 					}
 				});
-				$.fn.validateform = function(callback,options){
+				$.fn.initform = function(options){
 					var t = this
 					var opts = $.extend(defaults,options);
 					$(t).bindEvent(opts);
 					$(t).on('submit',function(e){
 						return $(t).validate(opts);
-					})
+					});
+				}
+				$.fn.ajaxSubmit = function(callback,options){
+					var t = this
+					var opts = $.extend(defaults,options);
+					if($(t).validate(opts) && callback != null && typeof(callback) == 'function')callback;
 				}
 			})(jQuery)
-			$('#formInput').validateform();
+			$('#formInput').initform();
+			$(function(){
+				$('#submitBtnA').click(function(){
+					$('#formInput').ajaxSubmit(function(){
+						console.log(1)
+					})
+				})
+			})
 		</script>
 	</body>
 </html>
