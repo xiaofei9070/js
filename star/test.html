@@ -105,6 +105,7 @@
 							$(this).off('focus');
 							$(this).off('blur');
 						});
+						$(t).off('submit');
 					},
 					validate:function(opts){
 						var t = this;
@@ -123,6 +124,7 @@
 				$.fn.initform = function(options){
 					var t = this
 					var opts = $.extend(defaults,options);
+					$(t).unBindEvent(opts.require);
 					$(t).bindEvent(opts);
 					$(t).on('submit',function(e){
 						return $(t).validate(opts);
@@ -131,14 +133,33 @@
 				$.fn.ajaxSubmit = function(callback,options){
 					var t = this
 					var opts = $.extend(defaults,options);
-					if($(t).validate(opts) && callback != null && typeof(callback) == 'function')callback;
+					if($(t).validate(opts) && callback != null && typeof(callback) == 'object'){
+						$.ajax({
+							type:callback.type,
+							url:callback.url,
+							async:true,
+							data:callback.data,
+							dataType:callback.dataType,
+							success:callback.success,
+							error:callback.error
+						});
+					};
 				}
 			})(jQuery)
 			$('#formInput').initform();
 			$(function(){
 				$('#submitBtnA').click(function(){
-					$('#formInput').ajaxSubmit(function(){
-						console.log(1)
+					$('#formInput').ajaxSubmit({
+						url:'callback.json',
+						data:{},
+						type:'GET',
+						dataType:'json',
+						success:function(data){
+							console.log(data.statusCode);
+						},
+						error:function(e){
+							
+						}
 					})
 				})
 			})
