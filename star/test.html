@@ -66,7 +66,16 @@
 						}
 					},
 					ajaxValidata:function(dataUrl,opts){
-						
+						$.ajax({
+							url:dataUrl,
+							data:{},
+							type:'POST',
+							async:false,
+							dataType:'json',
+							success:function(data){
+								
+							}
+						});
 					},
 					createHint:function(c,msg){
 						var name = $(this).attr('name');
