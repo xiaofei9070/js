@@ -14,6 +14,7 @@
 			<div>
 				<input type="text" name="name" class="require" value="1" data-role="/^[a-zA-Z]+$/" data-msg="请输入姓名" data-success="ok" data-error="需要为字母" id="name"/>
 				<input type="text" name="age" class="require" value="1" data-role="/^[0-9]+$/" data-msg="请输入年龄" data-success="ok" data-error="需要为数字" id="age"/>
+				<input type="text" name="bgname" class="require" data-ajax="200.json" data-msg="" data-error="" data-success="ok"/>
 			</div>
 			<select type="text" name="select" class="require" value="1" data-role="*" data-msg="请输入ser" id="select"/>
 				<option value="1">1</option>
@@ -35,9 +36,6 @@
 						
 				}
 				$.fn.extend({
-					ajaxsubmit:function(option){
-						
-					},
 					showMsg:function(dataMsg){
 						var msg = $(this).attr(dataMsg);
 						if(typeof(msg) == 'undefined'){
@@ -67,7 +65,7 @@
 							return eval(reg).test($(this).val());
 						}
 					},
-					ajaxValidata:function(){
+					ajaxValidata:function(dataUrl,opts){
 						
 					},
 					createHint:function(c,msg){
@@ -87,15 +85,11 @@
 						$(t).find('.' + opts.require).each(function(){
 							$(this).on({
 								'focus':function(){
-										$(this).showMsg(opts.dataMsg);
-									},
+									$(this).showMsg(opts.dataMsg);
+								},
 								'blur' :function(){
-										if($(this).role(opts.dataRole)){
-											$(this).showSuccess(opts.dataSuccess);
-										}else{
-											$(this).showError(opts.dataError);
-										}
-									}
+									$(this).validateText(opts);
+								}
 							});
 						});
 					},
@@ -111,13 +105,25 @@
 						var t = this;
 						var vali = true;
 						$(t).find('.' + opts.require).each(function(){
-							if($(this).role(opts.dataRole)){
-									$(this).showSuccess(opts.dataSuccess);
-								}else{
-									$(this).showError(opts.dataError);
-									vali = false;
-								}
+							if(!$(this).validateText(opts)){
+								vali = false;
+							};
 						});
+						return vali;
+					},
+					validateText:function(opts){
+						var vali = true;
+						var dataUrl = $(this).attr('data-ajax');
+						if(typeof(dataUrl) == 'undefined'){
+							if($(this).role(opts.dataRole)){
+								$(this).showSuccess(opts.dataSuccess);
+							}else{
+								$(this).showError(opts.dataError);
+								vali = false;
+							}
+						}else{
+							$(this).ajaxValidata(dataUrl,opts);
+						}
 						return vali;
 					}
 				});
