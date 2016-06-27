@@ -2,7 +2,6 @@
 .dialog{width:200px;height:150px;background:#fff;z-index:100;position:fixed;border-radius:5px;left:40%;top:40%;}
 .dialog .icon{width:100px;height:50px;margin:30px auto 0px;padding-left:50px;font-size:14px;line-height:50px;
 overflow:hidden;position:relative;}
-
 .dialog .dia_success{display: block;background:url(../img/dialog-icons.gif) no-repeat -4px 1px;}
 .dialog .dia_confirm{display: block;background:url(../img/dialog-icons.gif) no-repeat -4px -143px;}
 .dialog .dia_error{display: block;background:url(../img/dialog-icons.gif) no-repeat -4px -46px;}
