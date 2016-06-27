@@ -10,174 +10,57 @@
 		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 	</head>
 	<body>
-		<form id="formInput">
+		<form id="formInput" onsubmit="return false">
 			<div>
-				<input type="text" name="name" class="require" value="1" data-role="/^[a-zA-Z]+$/" data-msg="请输入姓名" data-success="ok" data-error="需要为字母" id="name"/>
-				<input type="text" name="age" class="require" value="1" data-role="/^[0-9]+$/" data-msg="请输入年龄" data-success="ok" data-error="需要为数字" id="age"/>
-				<input type="text" name="bgname" class="require" data-ajax="200.json" data-msg="" data-error="" data-success="ok"/>
+				<input type="text" name="name" name="password" data-role="password" data-error="密码格式错误" data-msg="建议至少使用两种字符组合" data-null="密码不能为空"/>
+				<span id="name"></span>
+				<input type="text" name="age" name="password" data-role="password" data-error="密码格式错误" data-msg="建议至少使用两种字符组合" data-null="密码不能为空"/>
+				<span id="age"></span>
+				<input type="text" name="bgname" name="password" data-role="password" data-error="密码格式错误" data-msg="建议至少使用两种字符组合" data-null="密码不能为空"/>
+				<span id="bgname"></span>
 			</div>
-			<select type="text" name="select" class="require" value="1" data-role="*" data-msg="请输入ser" id="select"/>
+			<select type="text" name="select" data-role="password" data-error="密码格式错误" data-msg="建议至少使用两种字符组合" data-null="密码不能为空"/>
+				<option value="">1</option>
 				<option value="1">1</option>
 			</select>
+			<span id="select"></span>
 			<button id="submitBtn" type="submit">提交</button>
 			<a id="submitBtnA">提交</a>
 		</form>
+		<script type="text/javascript" src="js/validateform.js"></script>
 		<script type="text/javascript">
-			(function($){
-				var defaults = {
-						require:'require',
-						dataRole:'data-role',
-						dataAjax:'data-ajax',
-						dataError:'data-error',
-						dataMsg:'data-msg',
-						dataSuccess:'data-success'
-					}
-				var messages = {
-						
-				}
-				$.fn.extend({
-					showMsg:function(dataMsg){
-						var msg = $(this).attr(dataMsg);
-						if(typeof(msg) == 'undefined'){
-							msg = '';
-						}
-						$(this).createHint('msg',msg);
-					},
-					showError:function(dataError){
-						var err = $(this).attr(dataError);
-						if(typeof(err) == 'undefined'){
-							err = 'error';
-						}
-						$(this).createHint('error',err);
-					},
-					showSuccess:function(dataSuccess){
-						var suc = $(this).attr(dataSuccess);
-						if(typeof(suc) == 'undefined'){
-							suc = 'ok';
-						}
-						$(this).createHint('success',suc);
-					},
-					role:function(dataRole){
-						var reg = $(this).attr(dataRole);
-						if(reg == '*'){
-							return true;
-						}else{
-							return eval(reg).test($(this).val());
-						}
-					},
-					ajaxValidata:function(dataUrl,opts){
-						$.ajax({
-							url:dataUrl,
-							data:{},
-							type:'POST',
-							async:false,
-							dataType:'json',
-							success:function(data){
-								
-							}
-						});
-					},
-					createHint:function(c,msg){
-						var name = $(this).attr('name');
-						if(typeof(name) != 'undefined'){
-							var obj = $(this).parents('form').find('#' + name + "Tip");
-							var clzss = obj.attr('class');
-							if(typeof(clzss) == 'undefined'){
-								$(this).after('<span id="' + name + 'Tip" class="' + c + '">'+msg+'</span>')
-							}else{
-								obj.removeAttr('class').addClass(c).text(msg);
-							}
-						}
-					},
-					bindEvent:function(opts){
-						var t = this;
-						$(t).find('.' + opts.require).each(function(){
-							$(this).on({
-								'focus':function(){
-									$(this).showMsg(opts.dataMsg);
-								},
-								'blur' :function(){
-									$(this).validateText(opts);
-								}
-							});
-						});
-					},
-					unBindEvent:function(c){
-						var t = this;
-						$(t).find('.' + c).each(function(){
-							$(this).off('focus');
-							$(this).off('blur');
-						});
-						$(t).off('submit');
-					},
-					validate:function(opts){
-						var t = this;
-						var vali = true;
-						$(t).find('.' + opts.require).each(function(){
-							if(!$(this).validateText(opts)){
-								vali = false;
-							};
-						});
-						return vali;
-					},
-					validateText:function(opts){
-						var vali = true;
-						var dataUrl = $(this).attr('data-ajax');
-						if(typeof(dataUrl) == 'undefined'){
-							if($(this).role(opts.dataRole)){
-								$(this).showSuccess(opts.dataSuccess);
-							}else{
-								$(this).showError(opts.dataError);
-								vali = false;
-							}
-						}else{
-							$(this).ajaxValidata(dataUrl,opts);
-						}
-						return vali;
-					}
-				});
-				$.fn.initform = function(options){
-					var t = this
-					var opts = $.extend(defaults,options);
-					$(t).unBindEvent(opts.require);
-					$(t).bindEvent(opts);
-					$(t).on('submit',function(e){
-						return $(t).validate(opts);
-					});
-				}
-				$.fn.ajaxSubmit = function(callback,options){
-					var t = this
-					var opts = $.extend(defaults,options);
-					if($(t).validate(opts) && callback != null && typeof(callback) == 'object'){
-						$.ajax({
-							type:callback.type,
-							url:callback.url,
-							async:true,
-							data:callback.data,
-							dataType:callback.dataType,
-							success:callback.success,
-							error:callback.error
-						});
-					};
-				}
-			})(jQuery)
-			$('#formInput').initform();
-			$(function(){
-				$('#submitBtnA').click(function(){
-					$('#formInput').ajaxSubmit({
-						url:'callback.json',
-						data:{},
-						type:'GET',
+			var validate = $.validateForm;
+		   validate.init('formInput',{phone:'请输入11位手机号码',
+									code:'请输入验证码',
+									phoneCode:'请输入手机验证码',
+									password:'建议至少使用两种字符组合',
+									confirmPassword:'再次输入密码'});
+		  $('#submitBtn').click(function(){
+		  	validate.validateSubmit(function(){
+		  			$.ajax({
+		  				url:'reg',
+		  				cache:false,
+		  				data:$('#formInput').serialize(),
+		  				type:'Post',
 						dataType:'json',
-						success:function(data){
-							console.log(data.statusCode);
+						beforeSend:function(){
+							$('#formInput').loading();
 						},
-						error:function(e){
-							
+						success:function(data){
+							if(data.status == 200){
+								setTimeout(function(){
+									window.location.href="<%=basePath%>user/regSuccess";
+								}, 300);
+							}else{
+								$('#' + data.tip).html(data.msg);
+							}
+						},
+						complete:function(){
+							$('#formInput').lComplete();
 						}
-					})
-				})
-			})
+		  			});
+		  		});
+		  })
 		</script>
 	</body>
 </html>

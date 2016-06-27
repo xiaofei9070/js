@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin:0;padding: 0;}
+			#stage{position:relative;width:200px;height:300px;margin:0 auto;margin-top:150px;
+			background:null;
+			transform: rotateX(-15deg) rotateY(0deg) perspective(2000px);
+			-webkit-transform: rotateX(-15deg) rotateY(0deg) perspective(2000px);
+			transform-style: preserve-3d;
+			-webkit-transform: preserve-3d;
+			-moz-transform: preserve-3d;
+			-ms-transform: preserve-3d;
+			-o-transform: preserve-3d;}
+			#shadow{position: absolute;left: 50%;top: 50%;width: 1200px;height: 1200px;margin-top: -600px;margin-left:-600px;
+			background: -webkit-radial-gradient(center center,600px 600px,rgba(50,50,50,1),rgba(0,0,0,0));
+			background:radial-gradient(center center,600px 600px,rgba(50,50,50,1),rgba(0,0,0,0));
+			transform: translateY(200px) rotateX(90deg);}
+			#stage dd{height:300px;width:200px;position: absolute;left: 0;top: 0;border: 1px solid #666;
+			transition: 500ms all ease;}
+			.over{position:absolute;left:0;top:320px;width:200px;height:300px;overflow:hidden;
+			transition: 2s all ease;
+			-webkit-transition: 2s all ease;
+			transform: scale(1,-1);
+			background-size:100% 100%;
+			}
+		</style>
+	</head>
+	<body style="background: black;">
+		<dl id="stage">
+			<dt id="shadow"></dt>
+			<dd style="transform: rotateY(40deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity: 0.2; background-image: -webkit-linear-gradient(top, rgb(0, 0, 0) 50%, rgba(255, 255, 255, 0)), url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(80deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(120deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(160deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(200deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(240deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(280deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(320deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+			<dd style="transform: rotateY(360deg) translateZ(480px);background-image: url(img/01.jpg);">
+				<div class="over" style="opacity:0.2;background-image: -webkit-linear-gradient(top,rgb(0,0,0) 50%,rgba(255,255,255,0)),url(img/01.jpg);"></div>
+			</dd>
+		</dl>
+	</body>
+</html>

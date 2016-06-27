@@ -1,0 +1,92 @@
+.dialog_mask{width:100%;height:100%;opacity:.3;filter:alpha(opacity=30);background-color:#888;position:fixed;z-index:99;}
+.dialog{width:200px;height:150px;background:#fff;z-index:100;position:fixed;border-radius:5px;left:40%;top:40%;}
+.dialog .icon{width:100px;height:50px;margin:30px auto 0px;padding-left:50px;font-size:14px;line-height:50px;
+overflow:hidden;position:relative;}
+
+.dialog .dia_success{display: block;background:url('img/dialog-icons.gif') no-repeat -4px 1px;}
+.dialog .dia_confirm{display: block;background:url('img/dialog-icons.gif') no-repeat -4px -143px;}
+.dialog .dia_error{display: block;background:url('img/dialog-icons.gif') no-repeat -4px -46px;}
+.dialog .dia_warn{display: block;background:url('img/dialog-icons.gif') no-repeat -4px -94px;}
+.dialog .dia_oper{width:200px;height:30px;text-align:center;position:relative;padding:10px 0;font-size:12px;margin-top:20px;}
+.dialog .dia_oper span{transition:all 0.3s;-webkit-transition:all 0.3s;-moz-transition: all 0.3s;-ms-transition:all 0.3s;-o-transition:all 0.3s;}
+.dialog .dia_oper span:hover{background-color:#54A8E0;box-shadow: 0px 0px 5px 0px #999;}
+.dialog .dia_oper span{background:#3498DB;color: #fff;line-height:25px;margin:5px;
+padding:7px 19px;cursor:pointer;border-radius:3px;}
+.dia_animation{
+		perspective:200px;
+		-webkit-perspective: 200px;
+		-moz-perspective: 200px;
+		-ms-perspective: 200px;
+		-moz-perspective: 200px;
+		animation-duration:.5s ;
+		-webkit-animation-duration:.5s;
+		-moz-animation-duration:.5s;
+		-ms-animation-duration:.5s;
+		-o-animation-duration:.5s;}
+		
+.right_fadeOut{
+	-webkit-animation-name: right_fadeOut;
+	-moz-animation-name:right_fadeOut;
+	-ms-animation-name:right_fadeOut
+	-o-animation-name:right_fadeOut;
+	animation-name: right_fadeOut;
+}
+@keyframes right_fadeOut{
+	from{transform: translateX(0px) rotateZ(0deg);opacity: 1;}
+	to{transform: translateX(1000px) rotateZ(180deg);opacity: 0;}
+}
+
+.left_fadeIn{
+	-webkit-animation-name: left_fadeIn;
+	-moz-animation-name:left_fadeIn;
+	-ms-animation-name:left_fadeIn
+	-o-animation-name:left_fadeIn;
+	animation-name: left_fadeIn;
+}
+@keyframes left_fadeIn{
+	from{transform: translateX(-1000px) rotate(-180deg);opacity: 0;}
+	to{transform: translateX(0px) rotate(0deg);opacity: 1;}
+}
+@-webkit-keyframes left_fadeIn{
+	from{transform: translateX(-1000px) rotate(-180deg);opacity: 0;}
+	to{transform: translateX(0px) rotate(0deg);opacity: 1;}
+}
+@-moz-keyframes left_fadeIn{
+	from{transform: translateX(-1000px) rotate(-180deg);opacity: 0;}
+	to{transform: translateX(0px) rotate(0deg);opacity: 1;}
+}
+@-ms-keyframes left_fadeIn{
+	from{transform: translateX(-1000px) rotate(-180deg);opacity: 0;}
+	to{transform: translateX(0px) rotate(0deg);opacity: 1;}
+}
+@-o-keyframes left_fadeIn{
+	from{transform: translateX(-1000px) rotate(-180deg);opacity: 0;}
+	to{transform: translateX(0px) rotate(0deg);opacity: 1;}
+}
+
+.rotateX{
+		-webkit-animation-name: rotateX;
+		-moz-animation-name:rotateX;
+		-ms-animation-name:rotateX
+		-o-animation-name:rotateX;
+		animation-name: rotateX;}
+@keyframes rotateX{
+	from{transform:rotateX(-90deg)}
+	to{transform:rotateX(0deg)}
+}
+@-webkit-keyframes rotateX{
+	from{transform:rotateX(-90deg)}
+	to{transform:rotateX(0deg)}
+}
+@-moz-keyframes rotateX{
+	from{transform:rotateX(-90deg)}
+	to{transform:rotateX(0deg)}
+}
+@-ms-keyframes rotateX{
+	from{transform:rotateX(-90deg)}
+	to{transform:rotateX(0deg)}
+}
+@-o-keyframes rotateX{
+	from{transform:rotateX(-90deg)}
+	to{transform:rotateX(0deg)}
+}
