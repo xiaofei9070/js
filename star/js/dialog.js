@@ -1,8 +1,8 @@
 ;(function($){
-				window.dialog = $.dialog = {
-					obj:null,
-					maskObj:null,
-					cssUrl:'css/dialog.css',
+	window.dialog = $.dialog = {
+		obj:null,
+		maskObj:null,
+		cssUrl:'css/dialog.css',
 		version:navigator.appVersion,
 		useCss3:function(){
 			return this.version.indexOf('MSIE 7.0') == -1 && this.version.indexOf('MSIE 8.0') == -1 && this.version.indexOf('MSIE 9.0') == -1;
@@ -11,7 +11,7 @@
 		close:function(){
 			var t = this;
 			if(t.useCss3()){
-				$(t.obj).removeClass('left_fadeIn').addClass('right_fadeOut').fadeOut(300);
+				$(t.obj).removeClass('bouncein').addClass('bounceout').fadeOut(300);
 				setTimeout(function(){
 					$(t.obj).remove();
 					$(t.maskObj).remove();
@@ -31,9 +31,10 @@
 			var t = this;
 			if(t.defaultInit){
 				t.initCss();
+				t.defaultInit = false;
 			}
 			var diamask = document.createElement('div');
-			diamask.setAttribute('class','dialog_mask');
+			diamask.setAttribute('class','dialog_mask dia_animation maskout');
 			document.body.appendChild(diamask);
 			t.maskObj = diamask;
 			switch(type){
@@ -78,12 +79,12 @@
 				content = defaultContent;
 			}
 			var dialog = document.createElement('div');
-			dialog.setAttribute('class','dialog dia_animation left_fadeIn');
+			dialog.setAttribute('class','dialog dia_animation bouncein');
 			if(typeof html == 'undefined')html = '';
-			var dialogHtml = '<div class="icon ' + iconClass + ' dia_animation rotateX">' +
+			var dialogHtml = '<div class="icon ' + iconClass + '">' +
 								content + 
 							'</div>' +
-							'<div class="dia_oper dia_animation rotateX">' +
+							'<div class="dia_oper">' +
 								html + '<span class="success_btn">确&nbsp;定</span>' +
 							'</div>';
 			dialog.innerHTML = dialogHtml;
@@ -112,28 +113,28 @@
 					callback();
 				}
 			})
+		},
+		success : function(content,callback){
+			var t = this;
+			t.open(content,callback,'success');
+		},
+		confirm : function(content,callback){
+			var t = this;
+			t.open(content,callback,'confirm');
+		},
+		error : function(content,callback){
+			var t = this;
+			t.open(content,callback,'error');
+		},
+		warn : function(content,callback){
+			var t = this;
+			t.open(content,callback,'warn');
 		}
-	}
-	$.dialog.success = function(content,callback){
-		var t = this;
-		t.open(content,callback,'success');
-	};
-	$.dialog.confirm = function(content,callback){
-		var t = this;
-		t.open(content,callback,'confirm');
-	}
-	$.dialog.error = function(content,callback){
-		var t = this;
-		t.open(content,callback,'error');
-	}
-	$.dialog.warn = function(content,callback){
-		var t = this;
-		t.open(content,callback,'warn');
 	}
 })(jQuery)
 /*$.dialog.success()*/
-$.dialog.confirm('确认删除',function(){
+/*$.dialog.confirm('确认删除',function(){
 	alert(1);
-})
-/*$.dialog.error();*/
+})*/
+
 /*$.dialog.warn()*/
