@@ -3,10 +3,57 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
-		<script type="text/javascript" src="js/box/box.js"></script>
+		<link rel="stylesheet" href="css/base.css"/>
 	</head>
 	<body>
+		<!--<div class="box_mask"></div>
+		<div class="box_skin box_dialog box_banch">
+			<div class="box_content box-padding">
+				<i class="box_icon box_icon_2"></i>	
+				adddddddddd
+			</div>
+			<div class="box_btn">
+				<a class="box_btn0">
+					确定
+				</a>
+			</div>
+		</div>-->
 		
+		<!--<div class="box_skin box_tips box_banch" style="left:10px;">
+			<div class="box_content box-padding">
+				<i class="box_icon_l"></i>	
+				adddddddddd
+			</div>
+		</div>-->
+		<!--<div class="box_mask"></div>
+		<div class="box_skin box_loading box_banch">
+			<div class="box_content box-padding">
+				<i class="box_icon box_icon_1"></i>	
+			</div>
+		</div>-->
+		<button onclick="tips()" id="tip" style="margin:100px 100px;height:25px;">tips</button>
+		<button onclick="tip1()" id="tip1"style="margin:100px 100px;height:25px;">tips1</button>
+		<button onclick="tip2()" id="tip2"style="margin:100px 100px;height:25px;">tips2</button>
+		<button onclick="tip3()" id="tip3"style="margin:100px 100px;height:25px;">tips3</button>
+		<div style="height:1000px"></div>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/box/box.js"></script>
+		<script>
+			function tips(){
+				box.tips('tipsaaaaaaaaaa','#tip',{icon:'r',status:2})
+			}
+			function tip1(){
+				box.tips('tips1aaaaaaaaaaaaaaa','#tip1')
+			}
+			function tip2(){
+				box.tips('tips2aaaaaaaa','#tip2',{icon:'t',status:0})
+			}
+			function tip3(){
+				box.tips('tips3aaaaa','#tip3',{icon:'l',status:0})
+				box.alert("删除成功");
+				box.msg();
+				box.loading();
+			}
+		</script>
 	</body>
 </html>

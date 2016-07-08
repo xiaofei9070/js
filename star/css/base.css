@@ -1,0 +1,13 @@
+/*初始化*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,input,button,textarea,p,blockquote,th,td,form{margin:0;padding:0;}
+body{font:14px '\5FAE\8F6F\96C5\9ED1',Tahoma,Arial,Helvetica,sans-serif}
+
+/*滚动条*/
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-button:vertical{display: none;}
+::-webkit-scrollbar-track:vertical{background-color:#000;}
+::-webkit-scrollbar-track-piece{background-color:#F5F5F5}
+::-webkit-scrollbar-thumb:vertical{margin-right:10px;background-color: #999;}
+::-webkit-scrollbar-thumb:vertical:hover{background-color:#666;}
+::-webkit-scrollbar-corner:vertical{background-color:#535353;}
+::-webkit-scrollbar-resizer:vertical{background-color: #FF6E00;}
