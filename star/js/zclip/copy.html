@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/zclip/jquery.zclip.min.js"></script>
+	</head>
+	<body>
+		<input type="text" id="content" value="1111111111111"/><button id="cp-btn">复制</button>
+		<script type="text/javascript">
+			$(function(){
+				$('#cp-btn').copyTo({
+					content:function(){
+						return $('#content').val();
+					},
+					path:'js/zclip/ZeroClipboard.swf'
+				})
+			})
+		</script>
+	</body>
+</html>

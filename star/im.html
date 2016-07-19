@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		 console.log(caches)
+		 caches.open('test').then(function(cache){
+		 	cache.add('htm5.html')
+		 })
+		 caches.keys().then(function(cachekeys){
+		 	console.log(cachekeys)
+		 })
+	</script>
+</html>
